@@ -16,36 +16,37 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-	<Grid x:Name="LayoutRoot" Background="Transparent">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-		<!--TitlePanel contains the name of the application and page title-->
-		<StackPanel Grid.Row="0" Margin="12,17,0,28">
-			<TextBlock x:Name="appNameText" Text="Travel Route" Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock x:Name="pageNameText" Text="bienvenido" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-		</StackPanel>
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="appNameText" Text="Travel Route" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="pageNameText" Text="bienvenido" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,3,12,-3">
-			<TextBlock x:Name="welcomeText" HorizontalAlignment="Center" Margin="12,0,0,0" TextWrapping="Wrap" Text="Bienvenido a Travel Route, antes de comenzar necesitamos algunos datos:" VerticalAlignment="Top" TextAlignment="Center"/>
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="-11,0,35,0">
+            <TextBlock x:Name="welcomeText" HorizontalAlignment="Center" Margin="12,0,0,0" TextWrapping="Wrap" Text="Bienvenido a Travel Route, antes de comenzar necesitamos algunos datos:" VerticalAlignment="Top" TextAlignment="Center"/>
 
             <!-- login control -->
             <facebookControls:LoginButton x:Name="facebookDataButton" ApplicationId="453272671466871" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0" SessionStateChanged="facebookDataButton_SessionStateChanged"/>
-
             <TextBlock Text="Nombre" HorizontalAlignment="Left" Margin="12,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <TextBox x:Name="userName" HorizontalAlignment="Center" Height="72" Margin="0,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Text="{Binding CurrentUser.Name, ElementName=loginButton}"/>
-			<TextBlock HorizontalAlignment="Left" Margin="12,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Sexo"/>
-            <toolkit:ListPicker VerticalAlignment="Center" Margin="10,50,10,0" >
+            <TextBox x:Name="userInfo" HorizontalAlignment="Center" Height="72" Margin="0,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Text="{Binding CurrentUser.Name, ElementName=loginButton}" />
+            <TextBlock HorizontalAlignment="Left" Margin="12,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Sexo"/>
+            <toolkit:ListPicker x:Name="List1"  VerticalAlignment="Center" Margin="10,50,10,0" >
                 <toolkit:ListPickerItem x:Name="emptyItem" Content="Seleccione una de las opciones" Margin="8,0,-8,0" />
                 <toolkit:ListPickerItem x:Name="hombreItem" Content="Hombre" />
                 <toolkit:ListPickerItem x:Name="mujerItem" Content="Mujer" />
             </toolkit:ListPicker>
             <TextBlock HorizontalAlignment="Left" Margin="12,200,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Text="Fecha de Nacimiento"/>
-            <toolkit:DatePicker Margin="0,300,0,0" VerticalAlignment="Center"/>
-		</Grid>
-	</Grid>
+            <toolkit:DatePicker x:Name="birDate" Margin="0,300,0,0" VerticalAlignment="Center"/>
+            <Image x:Name= "ImageUser" Visibility="Visible" HorizontalAlignment="Left" Height="91" Margin="336,58,0,0" VerticalAlignment="Top" Width="100"/>
+            <Button Content="Button" HorizontalAlignment="Left" Margin="201,510,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        </Grid>
+    </Grid>
 
 </phone:PhoneApplicationPage>

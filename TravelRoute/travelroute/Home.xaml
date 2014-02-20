@@ -16,7 +16,7 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
+    <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -36,11 +36,11 @@
                     </phone:PanoramaItem.RenderTransform>
 
                     <!-- Popular routes data bindings -->
-                    <phone:LongListSelector Margin="0,0,0,0" ItemsSource="{Binding PopularRouteList}">
+                    <phone:LongListSelector x:Name="popularLLS" Margin="0,0,0,0" ItemsSource="{Binding PopularRouteList}" SelectionChanged="popularLLS_SelectionChanged">
                         <phone:LongListSelector.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <Grid x:Name="popularGrid" Width="396" Height="180" Tap="popularGrid_Tap">
+                                    <Grid x:Name="popularGrid" Width="396" Height="180">
                                         <Grid.RowDefinitions>
                                             <RowDefinition/>
                                             <RowDefinition/>
@@ -51,11 +51,11 @@
                                         </Grid.ColumnDefinitions>
                                         <Image Margin="10" Source="{Binding Image}" Stretch="UniformToFill" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
                                         <Canvas Background="Black" Opacity="0.3" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="20,10,0,0" FontSize="26.667"/>
-                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Place}" VerticalAlignment="Top" Margin="20,40,0,0" FontSize="17.333" Grid.ColumnSpan="2"/>
-                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Owner}" VerticalAlignment="Top" Margin="20,60,0,0" FontSize="13.333" Grid.ColumnSpan="2"/>
-                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Duration}" VerticalAlignment="Bottom" Grid.Row="1" Margin="20,0,0,35" FontSize="21.333"/>
-                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Price}" VerticalAlignment="Bottom" Margin="20,0,0,10" Grid.Row="1" FontSize="21.333"/>
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="20,10,0,0" FontSize="26.667" Foreground="White"/>
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Place}" VerticalAlignment="Top" Margin="20,40,0,0" FontSize="17.333" Grid.ColumnSpan="2" Foreground="White"/>
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Owner}" VerticalAlignment="Top" Margin="20,60,0,0" FontSize="13.333" Grid.ColumnSpan="2" Foreground="White"/>
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Duration}" VerticalAlignment="Bottom" Grid.Row="1" Margin="20,0,0,35" FontSize="21.333" Foreground="White"/>
+                                        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Price}" VerticalAlignment="Bottom" Margin="20,0,0,10" Grid.Row="1" FontSize="21.333" Foreground="White"/>
                                         <Grid Grid.Row="1" Grid.Column="1" Margin="30,50,20,10">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition/>
@@ -88,11 +88,11 @@
                                 </Grid>
                             </phone:PivotItem.Header>
                             <!-- Route data bindings -->
-                            <phone:LongListSelector Margin="0,0,0,0" ItemsSource="{Binding ActiveRouteList}">
+                            <phone:LongListSelector x:Name="activeLLS" Margin="0,0,0,0" ItemsSource="{Binding ActiveRouteList}" SelectionChanged="activeLLS_SelectionChanged">
                                 <phone:LongListSelector.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel>
-                                            <Grid x:Name="activeGrid" Width="372" Height="171" Tap="activeGrid_Tap">
+                                            <Grid x:Name="activeGrid" Width="372" Height="171">
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition/>
                                                     <RowDefinition/>
@@ -103,9 +103,9 @@
                                                 </Grid.ColumnDefinitions>
                                                 <Image Margin="10" Source="{Binding Image}" Stretch="UniformToFill" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
                                                 <Canvas Background="Black" Opacity="0.3" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-                                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="20,10,0,0" FontSize="26.667"/>
-                                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Duration}" VerticalAlignment="Bottom" Grid.Row="1" Margin="20,0,0,35" FontSize="21.333"/>
-                                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Price}" VerticalAlignment="Bottom" Margin="20,0,0,10" Grid.Row="1" FontSize="21.333"/>
+                                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Name}" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="20,10,0,0" FontSize="26.667" Foreground="White"/>
+                                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Duration}" VerticalAlignment="Bottom" Grid.Row="1" Margin="20,0,0,35" FontSize="21.333" Foreground="White"/>
+                                                <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Price}" VerticalAlignment="Bottom" Margin="20,0,0,10" Grid.Row="1" FontSize="21.333" Foreground="White"/>
                                             </Grid>
                                         </StackPanel>
                                     </DataTemplate>
@@ -162,7 +162,7 @@
                                     </Grid.ColumnDefinitions>
                                     <Image x:Name="fin1Image" Margin="10" Source="/Assets/populares-02.png" Stretch="UniformToFill" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
                                     <Canvas x:Name="fin1Canvas" Background="Black" Opacity="0.3" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-                                    <TextBlock x:Name="fin1Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Circuito &quot;W&quot; Torres del Paine" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="20,10,0,0" FontSize="26.667"/>
+                                    <TextBlock x:Name="fin1Name" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Circuito &quot;W&quot; Torres del Paine" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="20,10,0,0" FontSize="26.667" Foreground="White"/>
                                     <TextBlock x:Name="fin1Place" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Parque Nacional Torres del Paine, XII Región" VerticalAlignment="Top" Margin="20,40,0,0" FontSize="17.333" Grid.ColumnSpan="2"/>
                                     <TextBlock x:Name="fin1Days" HorizontalAlignment="Left" TextWrapping="Wrap" Text="7 días" VerticalAlignment="Bottom" Grid.Row="1" Margin="20,0,0,35" FontSize="21.333"/>
                                     <TextBlock x:Name="fin1Price" HorizontalAlignment="Left" TextWrapping="Wrap" Text="$ 326.910" VerticalAlignment="Bottom" Margin="20,0,0,10" Grid.Row="1" FontSize="21.333"/>
@@ -179,7 +179,7 @@
                                         <Image x:Name="fin1Star2" Grid.Column="1" Stretch="None" Source="/Assets/starFull.png"/>
                                         <Image x:Name="fin1Star3" Grid.Column="2" Source="/Assets/starFull.png" Stretch="None"/>
                                         <Image x:Name="fin1Star4" Grid.Column="3" Source="/Assets/starFull.png" Stretch="None"/>
-                                        <Image x:Name="fin1Star5" Grid.Column="4" Stretch="None" Source="/Assets/starEmpty.png"/>
+                                        <Image x:Name="fin1Star5" Grid.Column="4" Stretch="None" Source="/Assets/starFull.png"/>
                                     </Grid>
                                 </Grid>
                             </Grid>

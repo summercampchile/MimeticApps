@@ -7,6 +7,7 @@ using System.Net;
 using Newtonsoft.Json;
 using Microsoft.WindowsAzure.MobileServices;
 using travelroute.Resources;
+using travelroute.DBClasses;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using System.Windows;
@@ -17,95 +18,26 @@ using Microsoft.WindowsAzure.Storage.Blob;
 
 namespace travelroute
 {
-    public class Route
-    {
-        public string Id { get; set; }
-
-        [JsonProperty(PropertyName = "ownerId")]
-        public string OwnerId { get; set; }
-
-        [JsonProperty(PropertyName = "originalRouteId")]
-        public string OriginalRouteId { get; set; }
-
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        [JsonProperty(PropertyName = "desciption")]
-        public string Description { get; set; }
-
-        [JsonProperty(PropertyName = "duration")]
-        public int Duration { get; set; }
-
-        [JsonProperty(PropertyName = "routePicture")]
-        public string RoutePicture { get; set; }
-
-        [JsonProperty(PropertyName = "copiedNumber")]
-        public int CopiedNumber { get; set; }
-
-        [JsonProperty(PropertyName = "status")]
-        public string Status { get; set; }
-
-        [JsonProperty(PropertyName = "isShared")]
-        public bool IsShared { get; set; }
-
-        [JsonProperty(PropertyName = "isPopular")]
-        public bool IsPopular { get; set; }
-
-        [JsonProperty(PropertyName = "place")]
-        public string Place { get; set; }
-
-        [JsonProperty(PropertyName = "containerName")]
-        public string ContainerName { get; set; }
-
-        [JsonProperty(PropertyName = "resourceName")]
-        public string ResourceName { get; set; }
-
-        [JsonProperty(PropertyName = "sasQueryString")]
-        public string SasQueryString { get; set; }
-    }
-
-    public class User
-    {
-        public string Id { get; set; }
-
-        [JsonProperty(PropertyName = "facebookId")]
-        public string FacebookId { get; set; }
-
-        [JsonProperty(PropertyName = "twitterId")]
-        public string TwitterId { get; set; }
-
-        [JsonProperty(PropertyName = "name")]
-        public string Name { get; set; }
-
-        [JsonProperty(PropertyName = "description")]
-        public string Description { get; set; }
-
-        [JsonProperty(PropertyName = "gender")]
-        public string Gender { get; set; }
-
-        [JsonProperty(PropertyName = "birthdate")]
-        public string Birthdate { get; set; }
-
-        [JsonProperty(PropertyName = "profilePicture")]
-        public string ProfilePicture { get; set; }
-
-        [JsonProperty(PropertyName = "facebookAccessToken")]
-        public string FacebookAccessToken { get; set; }
-    }
-
     //static class so it is available to every class on the project. This way different interfaces can interact
     //with the database hosted in Windows Azure
     public static class AzureDBM
     {
-
         // MobileServiceCollectionView implements ICollectionView (useful for databinding to lists) and 
         // is integrated with your Mobile Service to make it easy to bind your data to the ListView
         
         public static MobileServiceCollection<Route, Route> routeItems;
+        public static MobileServiceCollection<Route, Route> popularRouteItems;
+        public static MobileServiceCollection<Route, Route> activeRouteItems;
         public static IMobileServiceTable<Route> routeTable = App.MobileService.GetTable<Route>();
 
         public static MobileServiceCollection<User, User> userItems;
         public static IMobileServiceTable<User> userTable = App.MobileService.GetTable<User>();
+
+        public static MobileServiceCollection<Register, Register> registerItems;
+        public static IMobileServiceTable<Register> registerTable = App.MobileService.GetTable<Register>();
+
+        //temp variables
+        public static Route selectedRoute;
 
         public static async System.Threading.Tasks.Task AuthenticateWithFacebook()
         {
@@ -116,13 +48,31 @@ namespace travelroute
                 try
                 {
                     App.MobileService.CurrentUser = await App.MobileService.LoginAsync(MobileServiceAuthenticationProvider.Facebook);
-                    AzureDBM.LoadUserData();
+
+                    //Loads user data
+                    try
+                    {
+                        /*AzureDBM.userItems = await AzureDBM.userTable
+                            .Where(usuario => usuario.FacebookId == App.MobileService.CurrentUser.UserId.Split(':')[1])
+                            .ToCollectionAsync();
+                        */
+                        //MessageBox.Show("dato 1" + userItems[0].FacebookId + "       dato 2" + App.MobileService.CurrentUser.UserId.Split(':')[1]);
+                    }
+                    catch (MobileServiceInvalidOperationException e)
+                    {
+                        MessageBox.Show(e.Message, "Error loading user data", MessageBoxButton.OK);
+                    }
                 }
                 catch (InvalidOperationException)
                 {
-                    message = "You must log in. Login Required";
+                    message = "Ha ocurrido un error al iniciar sesión, por favor inténtalo nuevamente";
                     MessageBox.Show(message);
+
+                    break;
                 }
+
+                //MessageBox.Show("HOla"++=AzureDBM.userItems[0].FacebookId);
+                //MessageBox.Show(userItems[0].FacebookId);
 
 
             }
@@ -136,13 +86,20 @@ namespace travelroute
                 string message;
                 try
                 {
-                    App.MobileService.CurrentUser = await App.MobileService.LoginAsync(MobileServiceAuthenticationProvider.Twitter);
+                    //App.MobileService.CurrentUser = await App.MobileService.LoginAsync(MobileServiceAuthenticationProvider.Twitter);
                     //message = string.Format("You are now logged in - {0}", App.MobileService.CurrentUser.UserId);
+
+                    message = "Aun tenemos problemas con Twitter, por favor intenta iniciar sesión con Facebook";
+                    MessageBox.Show(message);
+
+                    break;
                 }
                 catch (InvalidOperationException)
                 {
-                    message = "You must log in. Login Required";
+                    message = "Ha ocurrido un error al iniciar sesión, por favor inténtalo nuevamente";
                     MessageBox.Show(message);
+
+                    break;
                 }
 
 
@@ -199,9 +156,6 @@ namespace travelroute
 
                     imageStream = null;
                 }
-
-                // Add the new item to the collection.
-                routeItems.Add(route);
             }
         }
 
@@ -218,18 +172,18 @@ namespace travelroute
 
         public static async void LoadUserData()
         {
-            //Loads user data
-            try
-            {
-                AzureDBM.userItems = await AzureDBM.userTable
-                    .Where(usuario => usuario.FacebookId == App.MobileService.CurrentUser.UserId)
-                    .ToCollectionAsync();
-            }
-            catch (MobileServiceInvalidOperationException e)
-            {
-                MessageBox.Show(e.Message, "Error loading user data", MessageBoxButton.OK);
-            }
+            
 
+        }
+
+        public static async void InsertUser(User user)
+        {
+            await userTable.InsertAsync(user);
+        }
+
+        public static async void InsertRegister(Register register)
+        {
+            await registerTable.InsertAsync(register);
         }
     }
 }

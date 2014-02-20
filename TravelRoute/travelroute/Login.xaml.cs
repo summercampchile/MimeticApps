@@ -23,9 +23,11 @@ namespace travelroute
         {
             //Awaits for the facebook login and the redirects the user to the Home layout
             await AzureDBM.AuthenticateWithFacebook();
+            
+            //Old code, go to Home
             NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
             /*
-            if(AzureDBM.userItems == null)
+            if (AzureDBM.userItems == null)
             {
                 NavigationService.Navigate(new Uri("/NewUser.xaml", UriKind.Relative));
             }
@@ -41,7 +43,7 @@ namespace travelroute
         {
             //Awaits for the twitter login and the redirects the user to the Home layout
             await AzureDBM.AuthenticateWithTwitter();
-            NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
+            //NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
         }
         
     }

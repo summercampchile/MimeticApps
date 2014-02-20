@@ -2,8 +2,6 @@ C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\Assets\A
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\Assets\Tiles\FlipCycleTileLarge.png
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\Assets\Tiles\FlipCycleTileSmall.png
-C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\Assets\Tiles\IconicTileMediumLarge.png
-C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\Assets\Tiles\IconicTileSmall.png
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\travelroute.dll
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\travelroute.pdb
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\AppManifest.xaml
@@ -124,11 +122,13 @@ C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\Home.g.c
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\Login.g.cs
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\NewRoute.g.cs
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\NewUser.g.cs
-C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\RouteEdit.g.cs
-C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\RouteView.g.cs
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\travelroute.g.resources
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\travelroute.Resources.AppResources.resources
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\travelroute.csproj.GenerateResource.Cache
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\travelroute.dll
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\travelroute.pdb
 C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\XapCacheFile.xml
+C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\EditRoute.g.cs
+C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\NewRegister.g.cs
+C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\ViewRoute.g.cs
+C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\travelroute.csprojResolveAssemblyReference.cache
