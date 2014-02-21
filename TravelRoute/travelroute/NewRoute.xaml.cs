@@ -75,7 +75,9 @@ namespace travelroute
             var route = new Route { Description = routeDescription.Text, Duration = 0, Name = routeName.Text, OwnerId = App.MobileService.CurrentUser.UserId, CopiedNumber = 0, Status = "active", IsPopular = false, IsShared = false };
             AzureDBM.InsertRoute(route, imageStream);
 
-            NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
+            AzureDBM.selectedRoute = route;
+
+            NavigationService.Navigate(new Uri("/EditRoute.xaml", UriKind.Relative));
         }
     }
 }

@@ -36,6 +36,7 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <maps:Map x:Name="routeMap" Margin="0" Grid.RowSpan="2"/>
+                <TextBlock x:Name="routeName" HorizontalAlignment="Left" Margin="12,-40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26.667"/>
                 <Grid x:Name="registerGrid" Grid.Row="1" Background="Black">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>

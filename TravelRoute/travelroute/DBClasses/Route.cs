@@ -55,5 +55,8 @@ namespace travelroute.DBClasses
 
         [JsonProperty(PropertyName = "price")]
         public int Price { get; set; }
+
+        [JsonProperty(PropertyName = "__createdAt")]
+        public string CreatedAt { get; set; }
     }
 }

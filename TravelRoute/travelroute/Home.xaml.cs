@@ -18,6 +18,7 @@ namespace travelroute
 {
     public partial class Home : PhoneApplicationPage
     {
+        private bool loadedFirstTime = true;
         public Home()
         {
             InitializeComponent();
@@ -31,11 +32,30 @@ namespace travelroute
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             RefreshPopularRouteItems();
-            RefreshActiveRouteItems();
 
-            if (!App.HomeViewModel.IsDataLoaded)
+            if (AzureDBM.isUserLoggedIn)
             {
-                App.HomeViewModel.LoadData();
+                RefreshActiveRouteItems();
+
+                if (!App.HomeViewModel.IsDataLoaded)
+                {
+                    App.HomeViewModel.LoadData();
+                }
+            }
+
+            else if(!AzureDBM.isUserLoggedIn  && loadedFirstTime) 
+            {
+                HomePanorama.Items.RemoveAt(1);
+                HomePanorama.Items.RemoveAt(2);
+                HomePanorama.Items.RemoveAt(2);
+
+                this.ApplicationBar.IsVisible = false;
+                loadedFirstTime = false;
+            }
+
+            else
+            {
+                this.ApplicationBar.IsVisible = false;
             }
 
             //Rutas Populares de ejemplo, Just In Case

@@ -21,6 +21,11 @@ namespace travelroute
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             routeName.Text = AzureDBM.selectedRoute.Name;
+
+            if (!AzureDBM.isUserLoggedIn)
+            {
+               this.ApplicationBar.IsVisible = false;
+            }
         }
 
         private void RouteViewPanorama_SelectionChanged(object sender, SelectionChangedEventArgs e)

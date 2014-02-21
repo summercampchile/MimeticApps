@@ -47,7 +47,7 @@
                         <TranslateTransform/>
                     </phone:PanoramaItem.RenderTransform>
                     <Grid Margin="0">
-                        <TextBlock x:Name="routeName" HorizontalAlignment="Left" Margin="0,-40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26.667"/>
+                        <TextBlock x:Name="routeName" HorizontalAlignment="Left" Margin="12,-40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26.667"/>
                         <Image Margin="0" Source="/Assets/routeMap.png"/>
                     </Grid>
                 </phone:PanoramaItem>

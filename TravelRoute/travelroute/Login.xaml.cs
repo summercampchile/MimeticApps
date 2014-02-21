@@ -45,6 +45,11 @@ namespace travelroute
             await AzureDBM.AuthenticateWithTwitter();
             //NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
         }
+
+        private void skipLoginButton_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
+        }
         
     }
 }

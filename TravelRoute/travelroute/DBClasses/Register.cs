@@ -33,15 +33,18 @@ namespace travelroute.DBClasses
         public string Description { get; set; }
 
         [JsonProperty(PropertyName = "expenses")]
-        public string Expenses { get; set; }
+        public int Expenses { get; set; }
 
         [JsonProperty(PropertyName = "appreciation")]
-        public string Appreciation { get; set; }
+        public int Appreciation { get; set; }
 
         [JsonProperty(PropertyName = "icon")]
         public string Icon { get; set; }
 
         [JsonProperty(PropertyName = "isShared")]
+
         public bool isShared { get; set; }
+        [JsonProperty(PropertyName = "__createdAt")]
+        public string CreatedAt { get; set; }
     }
 }

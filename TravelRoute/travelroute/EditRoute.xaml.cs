@@ -26,9 +26,12 @@ namespace travelroute
         private Ellipse mapCircle = new Ellipse();
 
         private MapOverlay myLocationOverlay = new MapOverlay();
+        
         private MapLayer myLocationLayer = new MapLayer();
-
         private MapLayer registerLayer = new MapLayer();
+        private MapLayer polyLayer = new MapLayer();
+
+        private MapPolyline polyLine = new MapPolyline();
 
         private bool firstMapLoad = true;
 
@@ -46,10 +49,13 @@ namespace travelroute
             registerGrid.Visibility = System.Windows.Visibility.Collapsed;
 
             routeMap.Layers.Add(registerLayer);
-        }
+            routeMap.Layers.Add(polyLayer);
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
+            polyLine.StrokeColor = Colors.Green;
+            polyLine.StrokeThickness = 6;
+
+            routeMap.MapElements.Add(polyLine);
+
             geolocator = new Geolocator();
             geolocator.DesiredAccuracy = PositionAccuracy.High;
             geolocator.MovementThreshold = 1; // The units are meters.
@@ -63,8 +69,17 @@ namespace travelroute
 
             myLocationLayer.Add(myLocationOverlay);
             routeMap.Layers.Add(myLocationLayer);
+        }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            routeName.Text = AzureDBM.selectedRoute.Name;
             RefreshRegisters();
+        }
+
+        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
         }
 
         private void geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
@@ -97,7 +112,11 @@ namespace travelroute
             {
                 AzureDBM.registerItems = await AzureDBM.registerTable
                     .Where(reg => reg.RouteId == AzureDBM.selectedRoute.Id)
+                    .OrderBy(reg => reg.CreatedAt)
                     .ToCollectionAsync();
+
+                polyLine.Path.Clear();
+                
 
                 foreach (Register r in AzureDBM.registerItems)
                 {
@@ -143,6 +162,8 @@ namespace travelroute
                     registerOverlay.GeoCoordinate = new GeoCoordinate(r.Latitude, r.Longitude);
 
                     registerLayer.Add(registerOverlay);
+
+                    polyLine.Path.Add(new GeoCoordinate(r.Latitude, r.Longitude));
                 }
             }
             catch (MobileServiceInvalidOperationException e)
@@ -166,98 +187,38 @@ namespace travelroute
 
         private void POIButton_Click(object sender, RoutedEventArgs e)
         {
-            Image image = new Image();
-            //Define the URI location of the image
-            image.Source = new BitmapImage(new Uri("Assets/Icons/registerPOI.png", UriKind.Relative));
-            image.Stretch = System.Windows.Media.Stretch.None;
+            AzureDBM.selectedRegisterType = "POI";
+            AzureDBM.selectedRegisterLat = myLocationOverlay.GeoCoordinate.Latitude;
+            AzureDBM.selectedRegisterLon = myLocationOverlay.GeoCoordinate.Longitude;
 
-            MapOverlay registerOverlay = new MapOverlay();
-
-            registerOverlay.Content = image;
-            registerOverlay.PositionOrigin = new Point(0.5, 0.9);
-            registerOverlay.GeoCoordinate = myLocationOverlay.GeoCoordinate;
-
-            registerLayer.Add(registerOverlay);
-
-            Register r = new Register();
-            r.Type = "POI";
-            r.Latitude = registerOverlay.GeoCoordinate.Latitude;
-            r.Longitude = registerOverlay.GeoCoordinate.Longitude;
-            r.RouteId = AzureDBM.selectedRoute.Id;
-
-            AzureDBM.InsertRegister(r);
+            NavigationService.Navigate(new Uri("/NewRegister.xaml", UriKind.Relative));
         }
 
         private void sleepButton_Click(object sender, RoutedEventArgs e)
         {
-            Image image = new Image();
-            //Define the URI location of the image
-            image.Source = new BitmapImage(new Uri("Assets/Icons/registerSleep.png", UriKind.Relative));
-            image.Stretch = System.Windows.Media.Stretch.None;
+            AzureDBM.selectedRegisterType = "Sleep";
+            AzureDBM.selectedRegisterLat = myLocationOverlay.GeoCoordinate.Latitude;
+            AzureDBM.selectedRegisterLon = myLocationOverlay.GeoCoordinate.Longitude;
 
-            MapOverlay registerOverlay = new MapOverlay();
-
-            registerOverlay.Content = image;
-            registerOverlay.PositionOrigin = new Point(0.5, 0.9);
-            registerOverlay.GeoCoordinate = myLocationOverlay.GeoCoordinate;
-
-            registerLayer.Add(registerOverlay);
-
-            Register r = new Register();
-            r.Type = "Sleep";
-            r.Latitude = registerOverlay.GeoCoordinate.Latitude;
-            r.Longitude = registerOverlay.GeoCoordinate.Longitude;
-            r.RouteId = AzureDBM.selectedRoute.Id;
-
-            AzureDBM.InsertRegister(r);
+            NavigationService.Navigate(new Uri("/NewRegister.xaml", UriKind.Relative));
         }
 
         private void restaurantButton_Click(object sender, RoutedEventArgs e)
         {
-            Image image = new Image();
-            //Define the URI location of the image
-            image.Source = new BitmapImage(new Uri("Assets/Icons/registerEat.png", UriKind.Relative));
-            image.Stretch = System.Windows.Media.Stretch.None;
+            AzureDBM.selectedRegisterType = "Restaurant";
+            AzureDBM.selectedRegisterLat = myLocationOverlay.GeoCoordinate.Latitude;
+            AzureDBM.selectedRegisterLon = myLocationOverlay.GeoCoordinate.Longitude;
 
-            MapOverlay registerOverlay = new MapOverlay();
-
-            registerOverlay.Content = image;
-            registerOverlay.PositionOrigin = new Point(0.5, 0.9);
-            registerOverlay.GeoCoordinate = myLocationOverlay.GeoCoordinate;
-
-            registerLayer.Add(registerOverlay);
-
-            Register r = new Register();
-            r.Type = "Restaurant";
-            r.Latitude = registerOverlay.GeoCoordinate.Latitude;
-            r.Longitude = registerOverlay.GeoCoordinate.Longitude;
-            r.RouteId = AzureDBM.selectedRoute.Id;
-
-            AzureDBM.InsertRegister(r);
+            NavigationService.Navigate(new Uri("/NewRegister.xaml", UriKind.Relative));
         }
 
         private void transportButton_Click(object sender, RoutedEventArgs e)
         {
-            Image image = new Image();
-            //Define the URI location of the image
-            image.Source = new BitmapImage(new Uri("Assets/Icons/registerTransport.png", UriKind.Relative));
-            image.Stretch = System.Windows.Media.Stretch.None;
+            AzureDBM.selectedRegisterType = "Transport";
+            AzureDBM.selectedRegisterLat = myLocationOverlay.GeoCoordinate.Latitude;
+            AzureDBM.selectedRegisterLon = myLocationOverlay.GeoCoordinate.Longitude;
 
-            MapOverlay registerOverlay = new MapOverlay();
-
-            registerOverlay.Content = image;
-            registerOverlay.PositionOrigin = new Point(0.5, 0.9);
-            registerOverlay.GeoCoordinate = myLocationOverlay.GeoCoordinate;
-
-            registerLayer.Add(registerOverlay);
-
-            Register r = new Register();
-            r.Type = "Transport";
-            r.Latitude = registerOverlay.GeoCoordinate.Latitude;
-            r.Longitude = registerOverlay.GeoCoordinate.Longitude;
-            r.RouteId = AzureDBM.selectedRoute.Id;
-
-            AzureDBM.InsertRegister(r);
+            NavigationService.Navigate(new Uri("/NewRegister.xaml", UriKind.Relative));
         }
 
         private void pictureButton_Click(object sender, RoutedEventArgs e)
@@ -280,6 +241,9 @@ namespace travelroute
             r.Latitude = registerOverlay.GeoCoordinate.Latitude;
             r.Longitude = registerOverlay.GeoCoordinate.Longitude;
             r.RouteId = AzureDBM.selectedRoute.Id;
+            r.CreatedByCurrentUser = true;
+
+            polyLine.Path.Add(new GeoCoordinate(r.Latitude, r.Longitude));
 
             AzureDBM.InsertRegister(r);
         }
@@ -304,6 +268,9 @@ namespace travelroute
             r.Latitude = registerOverlay.GeoCoordinate.Latitude;
             r.Longitude = registerOverlay.GeoCoordinate.Longitude;
             r.RouteId = AzureDBM.selectedRoute.Id;
+            r.CreatedByCurrentUser = true;
+
+            polyLine.Path.Add(new GeoCoordinate(r.Latitude, r.Longitude));
 
             AzureDBM.InsertRegister(r);
         }
