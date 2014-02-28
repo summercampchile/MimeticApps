@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
@@ -13,6 +14,15 @@ namespace travelroute.ViewModels
 {
     public class RouteViewModel : INotifyPropertyChanged
     {
+        //Collections for RouteViewModel objects.
+        public ObservableCollection<CommentViewModel> CommentRouteList { get; private set; }
+
+        public RouteViewModel()
+        {
+            this.CommentRouteList = new ObservableCollection<CommentViewModel>();
+        }
+
+
         private BitmapImage _image;
 
         public BitmapImage Image

@@ -58,51 +58,7 @@ namespace travelroute
                 this.ApplicationBar.IsVisible = false;
             }
 
-            //Rutas Populares de ejemplo, Just In Case
-            /*
-            Route r1 = new Route();
-            r1.CopiedNumber = 0;
-            r1.Description = "Ruta por el Parque Nacional Torres del Paine";
-            r1.Duration = 7;
-            r1.IsPopular = true;
-            r1.IsShared = true;
-            r1.Name = "Circuito W Torres del Paine";
-            r1.OwnerId = "Anonymous";
-            r1.Place = "Parque Nacional Torres del Paine, XII Región";
-            r1.RoutePicture = "http://travelroutestorage.blob.core.windows.net/routecoverimages/04107852-d5e0-4695-826b-b3883fc8f1dd.jpg";
-            r1.Status = "active";
-            r1.Price = 326910;
-
-            Route r2 = new Route();
-            r2.CopiedNumber = 0;
-            r2.Description = "Explorando el Bosque";
-            r2.Duration = 3;
-            r2.IsPopular = true;
-            r2.IsShared = true;
-            r2.Name = "Explorando el Bosque";
-            r2.OwnerId = "Anonymous";
-            r2.Place = "Parque Nacional Conguillio, IX Región";
-            r2.RoutePicture = "http://travelroutestorage.blob.core.windows.net/routecoverimages/cb059430-95d7-4995-acd9-c0cec7dc6eb9.jpg";
-            r2.Status = "active";
-            r2.Price = 123790;
-
-            Route r3 = new Route();
-            r3.CopiedNumber = 0;
-            r3.Description = "Recorrido en Kayak";
-            r3.Duration = 12;
-            r3.IsPopular = true;
-            r3.IsShared = true;
-            r3.Name = "Recorrido en Kayak";
-            r3.OwnerId = "Anonymous";
-            r3.Place = "Lago LLanquihue, X Región";
-            r3.RoutePicture = "http://travelroutestorage.blob.core.windows.net/routecoverimages/231595d4-a1dd-485a-b0f5-3a05b301d25c.jpg";
-            r3.Status = "active";
-            r3.Price = 97340;
-
-            AzureDBM.InsertRoute(r1, null);
-            AzureDBM.InsertRoute(r2, null);
-            AzureDBM.InsertRoute(r3, null);
-            */
+            RefreshPerfilData();
         }
 
         // Back Button pressed: notify MainPage so it can exit application
@@ -166,6 +122,48 @@ namespace travelroute
             }
 
             //ListItems.ItemsSource = items;
+
+        }
+
+        private void RefreshPerfilData()
+        {
+            try
+            {
+
+                if (AzureDBM.isUserLoggedIn == true && Login.variableDePasada == 0)
+                {
+
+                    imagePerfil.Source = new BitmapImage(new Uri("http://graph.facebook.com/" + App.MobileService.CurrentUser.UserId.Split(':')[1] + "/picture?type=large", UriKind.Absolute));
+                    globalName.Text = AzureDBM.usuarioGlobal;
+                }
+                else
+                {
+                    if (AzureDBM.isUserLoggedIn == true && Login.variableDePasada == 5)
+                    {
+                        imagePerfil.Source = new BitmapImage(new Uri(NewUser.URLProfilePicture, UriKind.Absolute));
+                        globalName.Text = NewUser.name;
+                        pointUser.Text = "Puntos Travel Route: " + AzureDBM.puntosGlobal;
+                    }
+
+
+                }
+                if (AzureDBM.puntosGlobal == null || AzureDBM.puntosGlobal == "0")
+                {
+                    pointUser.Text = "Puntos Travel Route: Usted aún no posee puntos";
+
+                }
+                else
+                {
+                    pointUser.Text = "Puntos Travel Route: " + AzureDBM.puntosGlobal;
+
+                }
+            }
+            catch
+            {
+
+                MessageBox.Show("Error loading items");
+
+            }
 
         }
 
@@ -285,5 +283,55 @@ namespace travelroute
             NavigationService.Navigate(new Uri("/EditRoute.xaml", UriKind.Relative));
         }
 
+        private void shareButton_Click(object sender, EventArgs e)
+        {
+
+            TextBox Comentar = new TextBox();
+
+            Comentar.Visibility = Visibility.Visible;
+            string descripcion = Comentar.Text;
+            string picture = "";
+
+            facebookClass.PublishStory(descripcion, picture);
+
+            NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
+        }
+
+        private void busqueda_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            AzureDBM.selectedRoute = AzureDBM.searchItems[((LongListSelector)sender).ItemsSource.IndexOf(((LongListSelector)sender).SelectedItem)];
+            NavigationService.Navigate(new Uri("/ViewRoute.xaml", UriKind.Relative));
+        }
+
+        private async void searchButton_Click(object sender, RoutedEventArgs e)
+        {
+            string tag = searchText.Text;
+            try
+            {
+                AzureDBM.tagItems = await AzureDBM.tagTable
+                    .Where(tag2 => tag2.TagNom == tag)
+                    .ToCollectionAsync();
+                
+                App.HomeViewModel.SearchList.Clear();
+
+                foreach (Tag t in AzureDBM.tagItems)
+                {
+                    AzureDBM.searchItems = await AzureDBM.routeTable
+                        .Where(ruta => ruta.Id == t.RouteId)
+                        .ToCollectionAsync();
+                    foreach (Route r in AzureDBM.searchItems)
+                    {
+                        App.HomeViewModel.SearchList.Add(new RouteViewModel() { Image = new BitmapImage(new Uri(r.RoutePicture, UriKind.Absolute)), Name = r.Name, Duration = "0", Price = "0" });
+
+                    }
+
+                }
+            }
+
+            catch
+            {
+                MessageBox.Show("Error loading items");
+            }
+        }
     }
 }

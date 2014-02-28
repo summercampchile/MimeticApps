@@ -29,24 +29,28 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="-11,0,35,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0">
             <TextBlock x:Name="welcomeText" HorizontalAlignment="Center" Margin="12,0,0,0" TextWrapping="Wrap" Text="Bienvenido a Travel Route, antes de comenzar necesitamos algunos datos:" VerticalAlignment="Top" TextAlignment="Center"/>
 
             <!-- login control -->
             <facebookControls:LoginButton x:Name="facebookDataButton" ApplicationId="453272671466871" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0" SessionStateChanged="facebookDataButton_SessionStateChanged"/>
             <TextBlock Text="Nombre" HorizontalAlignment="Left" Margin="12,150,0,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
-            <TextBox x:Name="userInfo" HorizontalAlignment="Center" Height="72" Margin="0,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" Text="{Binding CurrentUser.Name, ElementName=loginButton}" />
-            <TextBlock HorizontalAlignment="Left" Margin="12,270,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Sexo"/>
-            <toolkit:ListPicker x:Name="List1"  VerticalAlignment="Center" Margin="10,50,10,0" >
-                <toolkit:ListPickerItem x:Name="emptyItem" Content="Seleccione una de las opciones" Margin="8,0,-8,0" />
+            <TextBox x:Name="userInfo" HorizontalAlignment="Center" Height="72" Margin="0,180,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456" />
+            <TextBlock HorizontalAlignment="Left" Margin="12,60,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Text="Sexo"/>
+            <toolkit:ListPicker x:Name="List1"  VerticalAlignment="Center" Margin="10,150,10,0" >
+                <toolkit:ListPickerItem x:Name="emptyItem" Content="Seleccione una de las opciones" Margin="0" VerticalAlignment="Center" />
                 <toolkit:ListPickerItem x:Name="hombreItem" Content="Hombre" />
                 <toolkit:ListPickerItem x:Name="mujerItem" Content="Mujer" />
             </toolkit:ListPicker>
-            <TextBlock HorizontalAlignment="Left" Margin="12,200,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Text="Fecha de Nacimiento"/>
-            <toolkit:DatePicker x:Name="birDate" Margin="0,300,0,0" VerticalAlignment="Center"/>
-            <Image x:Name= "ImageUser" Visibility="Visible" HorizontalAlignment="Left" Height="91" Margin="336,58,0,0" VerticalAlignment="Top" Width="100"/>
-            <Button Content="Button" HorizontalAlignment="Left" Margin="201,510,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+            <TextBlock HorizontalAlignment="Left" Margin="12,0,0,90" TextWrapping="Wrap" VerticalAlignment="Bottom" Text="Fecha de Nacimiento"/>
+            <toolkit:DatePicker x:Name="birthDate" Margin="0,0,0,20" VerticalAlignment="Bottom"/>
         </Grid>
     </Grid>
+    
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="saveButton" IconUri="Assets/Icons/save.png" Text="guardar" Click="saveButton_Click"/>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

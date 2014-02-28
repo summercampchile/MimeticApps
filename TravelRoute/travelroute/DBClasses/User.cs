@@ -34,5 +34,11 @@ namespace travelroute.DBClasses
 
         [JsonProperty(PropertyName = "facebookAccessToken")]
         public string FacebookAccessToken { get; set; }
+
+        [JsonProperty(PropertyName = "points")]
+        public string Points { get; set; }
+
+        [JsonProperty(PropertyName = "location")]
+        public string Location { get; set; }
     }
 }

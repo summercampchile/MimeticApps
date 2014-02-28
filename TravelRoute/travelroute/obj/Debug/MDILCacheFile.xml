@@ -1,7 +1,9 @@
-﻿<xapCache source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\travelroute_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="21-02-2014 14:53:49">
-  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\travelroute.dll" archivePath="travelroute.dll" lastWriteTime="21-02-2014 14:53:46" />
+﻿<xapCache source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\travelroute_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="28-02-2014 10:30:30">
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\obj\Debug\travelroute.dll" archivePath="travelroute.dll" lastWriteTime="28-02-2014 10:30:27" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\agregaImagen.png" archivePath="Assets\agregaImagen.png" lastWriteTime="06-02-2014 20:17:45" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\agregaImagenRegistro.png" archivePath="Assets\agregaImagenRegistro.png" lastWriteTime="21-02-2014 8:57:54" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\bns.png" archivePath="Assets\bns.png" lastWriteTime="28-02-2014 9:07:33" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\bs.png" archivePath="Assets\bs.png" lastWriteTime="28-02-2014 9:07:33" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\facebookLogin.png" archivePath="Assets\facebookLogin.png" lastWriteTime="07-02-2014 11:48:27" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\Icons\add.png" archivePath="Assets\Icons\add.png" lastWriteTime="01-01-2013 18:57:00" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\Icons\back.png" archivePath="Assets\Icons\back.png" lastWriteTime="01-01-2013 18:57:00" />
@@ -60,13 +62,21 @@
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\Icons\transport.rew.png" archivePath="Assets\Icons\transport.rew.png" lastWriteTime="01-01-2013 18:57:00" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\Icons\twitter.png" archivePath="Assets\Icons\twitter.png" lastWriteTime="06-02-2014 17:23:45" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\Icons\upload.png" archivePath="Assets\Icons\upload.png" lastWriteTime="01-01-2013 18:57:00" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\mbns.png" archivePath="Assets\mbns.png" lastWriteTime="28-02-2014 9:07:33" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\mbs.png" archivePath="Assets\mbs.png" lastWriteTime="28-02-2014 9:07:33" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\mmns.png" archivePath="Assets\mmns.png" lastWriteTime="28-02-2014 9:07:33" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\mms.png" archivePath="Assets\mms.png" lastWriteTime="28-02-2014 9:07:33" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\mns.png" archivePath="Assets\mns.png" lastWriteTime="28-02-2014 9:07:33" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\ms.png" archivePath="Assets\ms.png" lastWriteTime="28-02-2014 9:07:33" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\populares-01.png" archivePath="Assets\populares-01.png" lastWriteTime="06-02-2014 12:00:06" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\populares-02.png" archivePath="Assets\populares-02.png" lastWriteTime="06-02-2014 12:00:06" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\populares-03.png" archivePath="Assets\populares-03.png" lastWriteTime="06-02-2014 12:00:06" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\populares-04.png" archivePath="Assets\populares-04.png" lastWriteTime="06-02-2014 12:00:06" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\rns.png" archivePath="Assets\rns.png" lastWriteTime="28-02-2014 9:07:33" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\routeComments.png" archivePath="Assets\routeComments.png" lastWriteTime="06-02-2014 22:15:54" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\routeMap.png" archivePath="Assets\routeMap.png" lastWriteTime="06-02-2014 21:56:10" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\routeStat.png" archivePath="Assets\routeStat.png" lastWriteTime="06-02-2014 22:15:54" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\rs.png" archivePath="Assets\rs.png" lastWriteTime="28-02-2014 9:07:33" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\rutaPisco.png" archivePath="Assets\rutaPisco.png" lastWriteTime="06-02-2014 19:13:16" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\starEmpty.png" archivePath="Assets\starEmpty.png" lastWriteTime="06-02-2014 12:49:56" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Assets\starFull.png" archivePath="Assets\starFull.png" lastWriteTime="06-02-2014 12:49:56" />
@@ -80,7 +90,7 @@
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Toolkit.Content\ApplicationBar.Check.png" archivePath="Toolkit.Content\ApplicationBar.Check.png" lastWriteTime="11-02-2014 12:54:22" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Toolkit.Content\ApplicationBar.Delete.png" archivePath="Toolkit.Content\ApplicationBar.Delete.png" lastWriteTime="11-02-2014 12:54:22" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Toolkit.Content\ApplicationBar.Select.png" archivePath="Toolkit.Content\ApplicationBar.Select.png" lastWriteTime="11-02-2014 12:54:21" />
-  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="19-02-2014 15:54:01" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="28-02-2014 10:30:28" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="19-02-2014 9:42:53" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="19-02-2014 9:42:54" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\packages\Facebook.Client.0.8.5-alpha\lib\wp8\Facebook.Client.dll" archivePath="Facebook.Client.dll" lastWriteTime="14-02-2014 9:34:27" />
@@ -116,5 +126,5 @@
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\packages\Microsoft.Net.Http.2.2.13\lib\sl4-windowsphone71\System.Net.Http.Extensions.xml" archivePath="System.Net.Http.Extensions.xml" lastWriteTime="06-02-2014 10:08:28" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\packages\Microsoft.Net.Http.2.2.13\lib\sl4-windowsphone71\System.Net.Http.Primitives.xml" archivePath="System.Net.Http.Primitives.xml" lastWriteTime="06-02-2014 10:08:28" />
   <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\packages\System.Spatial.5.6.0\lib\portable-net40+sl5+wp8+win8\System.Spatial.Portable.xml" archivePath="System.Spatial.Portable.xml" lastWriteTime="13-02-2014 9:10:45" />
-  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="19-02-2014 15:54:01" />
+  <file source="C:\Users\Ignacio\Desktop\MSSummerCamp\TravelRoute\travelroute\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="28-02-2014 10:30:28" />
 </xapCache>

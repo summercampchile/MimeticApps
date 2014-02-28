@@ -96,12 +96,15 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="AzureDBM.cs" />
+    <Compile Include="DBClasses\RouteComment.cs" />
     <Compile Include="DBClasses\Register.cs" />
     <Compile Include="DBClasses\Route.cs" />
+    <Compile Include="DBClasses\Tag.cs" />
     <Compile Include="DBClasses\User.cs" />
     <Compile Include="EditRoute.xaml.cs">
       <DependentUpon>EditRoute.xaml</DependentUpon>
     </Compile>
+    <Compile Include="facebookClass.cs" />
     <Compile Include="Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -125,6 +128,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\RouteViewModel.cs" />
     <Compile Include="ViewRoute.xaml.cs">
@@ -178,6 +182,8 @@
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\bns.png" />
+    <Content Include="Assets\bs.png" />
     <Content Include="Assets\facebookLogin.png" />
     <Content Include="Assets\Icons\add.png" />
     <Content Include="Assets\Icons\back.png" />
@@ -236,13 +242,21 @@
     <Content Include="Assets\Icons\transport.rew.png" />
     <Content Include="Assets\Icons\twitter.png" />
     <Content Include="Assets\Icons\upload.png" />
+    <Content Include="Assets\mbns.png" />
+    <Content Include="Assets\mbs.png" />
+    <Content Include="Assets\mmns.png" />
+    <Content Include="Assets\mms.png" />
+    <Content Include="Assets\mns.png" />
+    <Content Include="Assets\ms.png" />
     <Content Include="Assets\populares-01.png" />
     <Content Include="Assets\populares-02.png" />
     <Content Include="Assets\populares-03.png" />
     <Content Include="Assets\populares-04.png" />
+    <Content Include="Assets\rns.png" />
     <Content Include="Assets\routeComments.png" />
     <Content Include="Assets\routeMap.png" />
     <Content Include="Assets\routeStat.png" />
+    <Content Include="Assets\rs.png" />
     <Content Include="Assets\rutaPisco.png" />
     <Content Include="Assets\starEmpty.png" />
     <Content Include="Assets\starFull.png" />

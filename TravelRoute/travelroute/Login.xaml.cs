@@ -15,6 +15,8 @@ namespace travelroute
     public partial class Login : PhoneApplicationPage
     {
 
+        public static int variableDePasada = 0;
+
         public Login()
         {
             InitializeComponent();
@@ -23,20 +25,26 @@ namespace travelroute
         {
             //Awaits for the facebook login and the redirects the user to the Home layout
             await AzureDBM.AuthenticateWithFacebook();
-            
-            //Old code, go to Home
-            NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
-            /*
-            if (AzureDBM.userItems == null)
-            {
-                NavigationService.Navigate(new Uri("/NewUser.xaml", UriKind.Relative));
-            }
 
-            else
+            //Old code, go to Home
+            if (AzureDBM.variableEstado == 10)
             {
                 NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
+
             }
-            */
+            else
+            {
+                if (AzureDBM.variableEstado == 11)
+                {
+
+                    NavigationService.Navigate(new Uri("/NewUser.xaml", UriKind.Relative));
+                }
+                else
+                {
+
+                    MessageBox.Show("Ha ocurrido un error, por favor intente más tarde");
+                }
+            }
         }
 
         private async void twitterLoginButton_Click(object sender, RoutedEventArgs e)
@@ -50,6 +58,6 @@ namespace travelroute
         {
             NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
         }
-        
+
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Media.Imaging;
 using travelroute.DBClasses;
+using System.Windows.Threading;
 
 namespace travelroute
 {
@@ -25,7 +26,6 @@ namespace travelroute
         public NewUser()
         {
             InitializeComponent();
-
         }
 
         private void Combo1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -52,7 +52,7 @@ namespace travelroute
 
             var userInfo = new System.IO.StringWriter();
 
-            userInfo.WriteLine(string.Format("", user.Birthday));
+            userInfo.WriteLine(string.Format("{0}", user.Birthday));
             userInfo.WriteLine();
 
             return userInfo.ToString();
@@ -78,22 +78,22 @@ namespace travelroute
             var currentUser = new Facebook.Client.GraphUser(result);
 
             this.userInfo.Text = this.BuildUserInfoDisplay(currentUser);
-            this.birDate.ValueStringFormat = this.BuildUserInfoDisplay2(currentUser);
+            
+            //se aprovecha el facebook.client.coontrols.userInfoChangedEventArgs
+            location = this.BuildUserInfoDisplay3(currentUser);
+            birthday = this.BuildUserInfoDisplay2(currentUser);
 
         }
 
 
         private void OnUserInfoChanged(object sender, Facebook.Client.Controls.UserInfoChangedEventArgs e)
         {
-
             this.userInfo.Text = this.BuildUserInfoDisplay(e.User);
 
 
             //string help = BuildUserInfoDisplay2(e.User);
 
-            //se aprovecha el facebook.client.coontrols.userInfoChangedEventArgs
-            location = this.BuildUserInfoDisplay(e.User);
-            birthday = this.BuildUserInfoDisplay(e.User);
+            
 
             //FIN ->se aprovecha el facebook.client.coontrols.userInfoChangedEventArgs
         }
@@ -112,13 +112,14 @@ namespace travelroute
 
 
                 //Obtener nombre del usuario de facebook
+
                 this.userInfo.Visibility = Visibility.Visible;
 
                 //Obtener fecha de nacimiento usuario de facebook
-                this.birDate.Visibility = Visibility.Visible;
+                this.birthDate.Visibility = Visibility.Visible;
 
                 //Obtener url de la foto de perfil para guardarla en azure
-                ImageUser.Source = new BitmapImage(new Uri("http://graph.facebook.com/" + App.MobileService.CurrentUser.UserId.Split(':')[1] + "/picture?type=small", UriKind.Absolute));
+                //ImageUser.Source = new BitmapImage(new Uri("http://graph.facebook.com/" + App.MobileService.CurrentUser.UserId.Split(':')[1] + "/picture?type=large", UriKind.Absolute));
 
                 await this.RetriveUserInfo();
                 //this.shareButton.Visibility = Visibility.Visible;
@@ -126,35 +127,25 @@ namespace travelroute
             }
             else if (e.SessionState == Facebook.Client.Controls.FacebookSessionState.Closed)
             {
-                this.userInfo.Visibility = Visibility.Collapsed;
-                ImageUser.Visibility = Visibility.Collapsed;
-                this.birDate.Visibility = Visibility.Collapsed;
                 //this.shareButton.Visibility = Visibility.Collapsed;
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void saveButton_Click(object sender, EventArgs e)
         {
-            URLProfilePicture = "http://graph.facebook.com/" + App.MobileService.CurrentUser.UserId.Split(':')[1] + "/picture?type=small";
-            
-            gender = this.List1.SelectedItem.ToString();
-            name = userInfo.Text;
-            birthday = birDate.Value.ToString();
-            location = location;
-
             User u = new User();
-            u.Birthdate = birthday;
-            u.ProfilePicture = URLProfilePicture;
-            u.Gender = gender;
-            u.Name = name;
+            u.Birthdate = birthDate.Value.ToString();
+            u.ProfilePicture = "http://graph.facebook.com/" + App.MobileService.CurrentUser.UserId.Split(':')[1] + "/picture?type=large";
+            u.Gender = (this.List1.Items[List1.SelectedIndex] as ListPickerItem).Content.ToString();
+            u.Name = userInfo.Text;;
             u.FacebookId = App.MobileService.CurrentUser.UserId.Split(':')[1];
+            u.Location = location;
+            u.Points = "0";
 
             AzureDBM.InsertUser(u);
 
             NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
         }
-
-
 
 
     }

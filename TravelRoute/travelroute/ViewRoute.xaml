@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     x:Class="travelroute.ViewRoute"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -26,46 +27,83 @@
     </phone:PhoneApplicationPage.ApplicationBar>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="appNameText" Text="Travel Route" Style="{StaticResource PhoneTextNormalStyle}"/>
-        </StackPanel>
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<!--TitlePanel contains the name of the application and page title-->
+		<StackPanel Grid.Row="0" Margin="12,17,0,28">
+			<TextBlock x:Name="appNameText" Text="Travel Route" Style="{StaticResource PhoneTextNormalStyle}"/>
+		</StackPanel>
 
-        <!--TitlePanel contains the name of the application and page title-->
+		<!--TitlePanel contains the name of the application and page title-->
 
+		<!--ContentPanel - place additional content here-->
         <!--ContentPanel - place additional content here-->
-        <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0">
-            <phone:Panorama x:Name="RouteViewPanorama" Margin="0,-40,0,0" Title="" SelectionChanged="RouteViewPanorama_SelectionChanged">
-                <phone:PanoramaItem x:Name="RouteMainPanorama" CacheMode="{x:Null}" Header="ruta" Tag="route">
-                    <phone:PanoramaItem.RenderTransform>
-                        <TranslateTransform/>
-                    </phone:PanoramaItem.RenderTransform>
-                    <Grid Margin="0">
-                        <TextBlock x:Name="routeName" HorizontalAlignment="Left" Margin="12,-40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26.667"/>
-                        <Image Margin="0" Source="/Assets/routeMap.png"/>
+		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0">
+			<phone:Panorama x:Name="RouteViewPanorama" Margin="0,-40,0,0" Title="" SelectionChanged="RouteViewPanorama_SelectionChanged">
+				<phone:PanoramaItem x:Name="RouteMainPanorama" CacheMode="{x:Null}" Header="ruta" Tag="route">
+					<phone:PanoramaItem.RenderTransform>
+						<TranslateTransform/>
+					</phone:PanoramaItem.RenderTransform>
+					<Grid Margin="0">
+						<TextBlock x:Name="routeName" HorizontalAlignment="Left" Margin="12,-40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26.667"/>
+						<maps:Map x:Name="routeMap" Margin="0"/>
+					</Grid>
+				</phone:PanoramaItem>
+				<phone:PanoramaItem x:Name="RouteStatPanorama" Header="estadísticas" Tag="stats">
+					<Grid x:Name="statMainGrid" ShowGridLines="True">
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<TextBlock x:Name="routeTime" Margin="0,10,0,0" TextWrapping="Wrap" Text="12:00:00" FontSize="64" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+						<TextBlock HorizontalAlignment="Center" Margin="0,0,0,20" TextWrapping="Wrap" Text="    Días      Horas     Minutos" VerticalAlignment="Bottom"/>
+						<TextBlock x:Name="routePrice" Margin="0,10,0,0" TextWrapping="Wrap" Text="$ 97.340" FontSize="64" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1"/>
+						<TextBlock HorizontalAlignment="Center" Margin="0,0,0,20" TextWrapping="Wrap" Text="Total gastado en la ruta" VerticalAlignment="Bottom" Grid.Row="1"/>
+						<TextBlock x:Name="routeDistance" Margin="0,10,0,0" TextWrapping="Wrap" Text="117 km" FontSize="64" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="2"/>
+						<TextBlock HorizontalAlignment="Center" Margin="0,0,0,20" TextWrapping="Wrap" Text="Distancia total recorrida" VerticalAlignment="Bottom" Grid.Row="2"/>
+						<Canvas x:Name="routeAppreciation" Height="60" Margin="20,20,20,0" Grid.Row="3" VerticalAlignment="Top" Background="#FF69C93D"/>
+						<TextBlock HorizontalAlignment="Center" Margin="0,0,0,20" TextWrapping="Wrap" Text="Valoración promedio de la ruta" VerticalAlignment="Bottom" Grid.Row="3"/>
+					</Grid>
+				</phone:PanoramaItem>
+				<phone:PanoramaItem x:Name="RouteCommentsPanorama" Header="comentarios" Tag="comments">
+					<Grid x:Name="commentsMainGrid">
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition Height="3*"/>
+						</Grid.RowDefinitions>
+						<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Agrega un comentario o valoración:" VerticalAlignment="Top" Margin="12,-20,0,0"/>
+						<TextBox x:Name="userComment" Margin="0" TextWrapping="Wrap" Height="100" VerticalAlignment="Top"/>
+						<toolkit:Rating x:Name="userRating" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,12,0"/>
+                        <!-- Popular routes data bindings -->
+                        <phone:LongListSelector x:Name="commentLLS" Grid.Row="1" Margin="0" ItemsSource="{Binding CommentRouteList}">
+                            <phone:LongListSelector.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Grid Margin="12,12,0,12" Grid.Row="1" Width="372" Height="110">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="2*"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="{Binding Comment}" HorizontalAlignment="Left" Margin="10" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                                            <toolkit:Rating Value="{Binding Appreciation}" IsEnabled="False" Grid.Column="1" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Top" Width="150" Height="Auto"/>
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </phone:LongListSelector.ItemTemplate>
+                        </phone:LongListSelector>
+                        
                     </Grid>
-                </phone:PanoramaItem>
-                <phone:PanoramaItem x:Name="RouteStatPanorama" Header="estadísticas" Tag="stats">
-                    <Grid x:Name="statMainGrid">
-                        <Image x:Name="routeStat" Margin="0" Source="/Assets/routeStat.png"/>
-                    </Grid>
-                </phone:PanoramaItem>
-                <phone:PanoramaItem x:Name="RouteCommentsPanorama" Header="comentarios" Tag="comments">
-                    <Grid x:Name="commentsMainGrid">
-                        <Image Margin="0" Source="/Assets/routeComments.png"/>
-                    </Grid>
-                </phone:PanoramaItem>
-            </phone:Panorama>
+				</phone:PanoramaItem>
+			</phone:Panorama>
 
 
-        </Grid>
+		</Grid>
 
-    </Grid>
+	</Grid>
 
 </phone:PhoneApplicationPage>

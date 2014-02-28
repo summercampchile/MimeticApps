@@ -85,7 +85,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton x:Name="addRegisterButton" IconUri="Assets/Icons/add.png" Text="registro" Click="addRegisterButton_Click"/>
-            <shell:ApplicationBarIconButton IconUri="Assets/Icons/share.png" Text="compartir"/>
+            <shell:ApplicationBarIconButton x:Name="reloadRegisterButton" IconUri="Assets/Icons/refresh.png" Text="recargar" Click="reloadRegisterButton_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 

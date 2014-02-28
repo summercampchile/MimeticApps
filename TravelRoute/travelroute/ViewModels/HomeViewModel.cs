@@ -9,20 +9,22 @@ namespace travelroute.ViewModels
 {
     public class HomeViewModel : INotifyPropertyChanged
     {
-        public HomeViewModel()
-        {
-            this.PopularRouteList = new ObservableCollection<RouteViewModel>();
-            this.ActiveRouteList = new ObservableCollection<RouteViewModel>();
-            this.PlannedRouteList = new ObservableCollection<RouteViewModel>();
-            this.EndedRouteList = new ObservableCollection<RouteViewModel>();
-        }
-
         //Collections for RouteViewModel objects.
         public ObservableCollection<RouteViewModel> PopularRouteList { get; private set; }
         public ObservableCollection<RouteViewModel> ActiveRouteList { get; private set; }
         public ObservableCollection<RouteViewModel> PlannedRouteList { get; private set; }
         public ObservableCollection<RouteViewModel> EndedRouteList { get; private set; }
 
+        public ObservableCollection<RouteViewModel> SearchList { get; private set; }
+
+        public HomeViewModel()
+        {
+            this.PopularRouteList = new ObservableCollection<RouteViewModel>();
+            this.ActiveRouteList = new ObservableCollection<RouteViewModel>();
+            this.PlannedRouteList = new ObservableCollection<RouteViewModel>();
+            this.EndedRouteList = new ObservableCollection<RouteViewModel>();
+            this.SearchList = new ObservableCollection<RouteViewModel>();
+        }
 
         public bool IsDataLoaded
         {

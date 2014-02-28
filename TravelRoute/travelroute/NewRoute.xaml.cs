@@ -60,20 +60,42 @@ namespace travelroute
             routeDescriptionScrollViewer.ScrollToVerticalOffset(200);
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private async void saveButton_Click(object sender, EventArgs e)
         {
             //Creates the new Route and then it sends it to Azure so we can store the route data.
             var route = new Route { Description = routeDescription.Text, Duration = 0, Name = routeName.Text, OwnerId = App.MobileService.CurrentUser.UserId, CopiedNumber = 0, Status = "planned", IsPopular = false, IsShared = false };
-            AzureDBM.InsertRoute(route, imageStream);
+            string idruta = await AzureDBM.InsertRoute(route, imageStream);
+
+            string tags = this.routeTags.Text;
+            string[] arreglo = tags.Split(';');
+
+            foreach (string s in arreglo)
+            {
+                Tag t = new Tag();
+                t.RouteId = idruta;
+                t.TagNom = s;
+                AzureDBM.InsertTag(t);
+            }
 
             NavigationService.Navigate(new Uri("/Home.xaml", UriKind.Relative));
         }
 
-        private void playButton_Click(object sender, EventArgs e)
+        private async void playButton_Click(object sender, EventArgs e)
         {
             //Creates the new Route and then it sends it to Azure so we can store the route data.
             var route = new Route { Description = routeDescription.Text, Duration = 0, Name = routeName.Text, OwnerId = App.MobileService.CurrentUser.UserId, CopiedNumber = 0, Status = "active", IsPopular = false, IsShared = false };
-            AzureDBM.InsertRoute(route, imageStream);
+            string idruta = await AzureDBM.InsertRoute(route, imageStream);
+
+            string tags = this.routeTags.Text;
+            string[] arreglo = tags.Split(';');
+
+            foreach (string s in arreglo)
+            {
+                Tag t = new Tag();
+                t.RouteId = idruta;
+                t.TagNom = s;
+                AzureDBM.InsertTag(t);
+            }
 
             AzureDBM.selectedRoute = route;
 
